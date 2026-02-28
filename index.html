@@ -12,10 +12,9 @@
       min-height: 100vh;
       padding: 20px;
     }
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    .container { max-width: 1180px; margin: 0 auto; }
+
+    /* FORM CARD */
     .card {
       background: #fff;
       border-radius: 16px;
@@ -25,18 +24,38 @@
     }
     .form-header {
       padding: 18px 24px;
-      background: rgba(15, 23, 42, 0.95);
+      background: rgba(15, 23, 42, 0.96);
       color: #e5e7eb;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
     }
-    .form-header h1 {
-      font-size: 20px;
+    .form-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #fbbf24, #f97316, #7c3aed);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      color: #f9fafb;
+    }
+    .branding-title {
+      font-size: 18px;
       font-weight: 700;
     }
-    .form-body {
-      padding: 20px 24px 24px;
+    .branding-sub {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 2px;
     }
     .badge {
       background: linear-gradient(135deg, #22c55e, #16a34a);
@@ -46,18 +65,13 @@
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.04em;
+      white-space: nowrap;
     }
-    .grid {
-      display: grid;
-      gap: 16px;
-    }
+    .form-body { padding: 20px 24px 24px; }
+    .grid { display: grid; gap: 16px; }
     @media (min-width: 720px) {
-      .grid-2 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      .grid-3 {
-        grid-template-columns: 2fr 1fr 1fr;
-      }
+      .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
     label {
       font-size: 13px;
@@ -80,6 +94,60 @@
       border-color: #6366f1;
       box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.35);
     }
+    .small { font-size: 12px; color: #6b7280; margin-top: 4px; }
+
+    /* Item rows in form */
+    .items-form-wrapper {
+      margin-top: 18px;
+      border-radius: 12px;
+      border: 1px dashed #d4d4d8;
+      padding: 14px 14px 10px;
+      background: #faf5ff;
+    }
+    .items-form-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: #4b5563;
+    }
+    .item-row {
+      display: grid;
+      grid-template-columns: 3fr 0.7fr 1.1fr 1.2fr 40px;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .item-row input {
+      padding: 8px 10px;
+      font-size: 13px;
+    }
+    .remove-btn {
+      border: none;
+      background: #fee2e2;
+      color: #b91c1c;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .add-btn {
+      margin-top: 4px;
+      border: none;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      background: #e0f2fe;
+      color: #0369a1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+    }
+
     .btn-primary {
       width: 100%;
       border: none;
@@ -95,25 +163,17 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      margin-top: 4px;
+      margin-top: 10px;
       transition: transform 0.15s, box-shadow 0.15s;
     }
     .btn-primary:hover {
       transform: translateY(-1px);
       box-shadow: 0 18px 40px rgba(79, 70, 229, 0.7);
     }
-    .btn-primary:active {
-      transform: translateY(0);
-      box-shadow: 0 8px 16px rgba(79, 70, 229, 0.55);
-    }
-    .small {
-      font-size: 12px;
-      color: #6b7280;
-      margin-top: 4px;
-    }
-    /* Invoice */
+
+    /* INVOICE CARD */
     .invoice-card {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
       border-radius: 18px;
       overflow: hidden;
@@ -123,36 +183,60 @@
     .inv-header {
       background: radial-gradient(circle at top left, #6366f1, #4f46e5, #0f172a);
       color: #e5e7eb;
-      padding: 26px 30px;
+      padding: 24px 30px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 18px;
+    }
+    .inv-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .inv-logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #f97316, #7c3aed);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 22px;
+      color: #fefce8;
+      box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.6);
+    }
+    .inv-title-block {
+      display: flex;
+      flex-direction: column;
     }
     .inv-title {
-      font-size: 30px;
+      font-size: 26px;
       font-weight: 800;
       letter-spacing: 0.18em;
       text-transform: uppercase;
     }
     .inv-sub {
-      font-size: 13px;
+      font-size: 12px;
       color: #c7d2fe;
-      margin-top: 3px;
+      margin-top: 2px;
+    }
+    .pill-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
     }
     .pill {
       border-radius: 999px;
       border: 1px solid rgba(191, 219, 254, 0.8);
       padding: 8px 14px;
-      font-size: 13px;
-      text-align: right;
+      font-size: 12px;
       min-width: 140px;
     }
-    .pill span {
-      display: block;
-    }
+    .pill span { display: block; }
     .pill-label {
-      font-size: 11px;
+      font-size: 10px;
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: #a5b4fc;
@@ -161,12 +245,10 @@
       font-weight: 600;
       color: #e5e7eb;
     }
-    .inv-body {
-      padding: 26px 30px 28px;
-      background: #f9fafb;
-    }
+
+    .inv-body { padding: 22px 28px 26px; background: #f9fafb; }
     .section-title {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -179,16 +261,13 @@
       color: #4c1d95;
       margin-bottom: 4px;
     }
-    .text {
-      font-size: 13px;
-      color: #4b5563;
-      line-height: 1.7;
-    }
+    .text { font-size: 13px; color: #4b5563; line-height: 1.7; }
     .muted { color: #6b7280; font-size: 12px; }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
+      margin-top: 18px;
       font-size: 13px;
     }
     thead {
@@ -196,7 +275,7 @@
       color: white;
     }
     th, td {
-      padding: 12px 10px;
+      padding: 10px 9px;
       text-align: left;
     }
     th {
@@ -204,22 +283,21 @@
       text-transform: uppercase;
       letter-spacing: 0.12em;
     }
-    tbody tr:nth-child(odd) {
-      background: #f3f4f6;
-    }
-    tbody tr:nth-child(even) {
-      background: #e5e7eb;
-    }
+    tbody tr:nth-child(odd) { background: #f3f4f6; }
+    tbody tr:nth-child(even) { background: #e5e7eb; }
     td.num {
       text-align: right;
       font-variant-numeric: tabular-nums;
     }
+
     .total-wrap {
-      margin-top: 18px;
+      margin-top: 16px;
       padding-top: 10px;
       border-top: 1px solid #cbd5f5;
       display: flex;
-      justify-content: flex-end;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
     }
     .total-box {
       min-width: 260px;
@@ -232,12 +310,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 14px;
+      font-size: 13px;
       margin-bottom: 4px;
       color: #111827;
-    }
-    .total-label {
-      font-weight: 600;
     }
     .grand {
       font-size: 20px;
@@ -245,27 +320,29 @@
       color: #4c1d95;
       margin-top: 2px;
     }
+
+    .payment-flex {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
     .pay-section {
-      margin-top: 20px;
-      padding: 16px 18px;
+      padding: 14px 16px;
       background: #fff7ed;
       border-radius: 12px;
       border-left: 5px solid #f97316;
+      font-size: 13px;
       display: flex;
       flex-direction: column;
       gap: 6px;
-      font-size: 13px;
     }
-    .pay-title {
-      font-weight: 700;
-      color: #c05621;
-      font-size: 14px;
-    }
+    .pay-title { font-weight: 700; color: #c05621; font-size: 14px; }
     .upi-chip {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 14px;
+      padding: 7px 12px;
       border-radius: 999px;
       background: #fff;
       border: 1px solid #fed7aa;
@@ -273,8 +350,49 @@
       color: #4c1d95;
       margin-top: 4px;
     }
+    .bank-box {
+      padding: 14px 16px;
+      background: #ecfeff;
+      border-radius: 12px;
+      border-left: 4px solid #0891b2;
+      font-size: 13px;
+    }
+    .bank-title { font-weight: 700; color: #0369a1; margin-bottom: 4px; }
+
+    .qr-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0f172a;
+      border-radius: 12px;
+      padding: 10px;
+    }
+    .qr-inner {
+      border-radius: 10px;
+      background: #f9fafb;
+      padding: 6px;
+    }
+    .qr-inner div {
+      width: 120px;
+      height: 120px;
+      background: repeating-linear-gradient(
+        45deg,
+        #0f172a 0,
+        #0f172a 4px,
+        #e5e7eb 4px,
+        #e5e7eb 8px
+      );
+      border-radius: 8px;
+    }
+    .qr-caption {
+      text-align: center;
+      margin-top: 4px;
+      font-size: 11px;
+      color: #e5e7eb;
+    }
+
     .footer {
-      padding: 16px 22px 18px;
+      padding: 14px 22px 16px;
       background: #f3f4f6;
       text-align: center;
       font-size: 12px;
@@ -286,20 +404,24 @@
       font-size: 11px;
       color: #9ca3af;
     }
+
     @media (max-width: 720px) {
+      .form-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
       .inv-header {
         flex-direction: column;
         align-items: flex-start;
       }
-      .pill {
-        align-self: stretch;
-        text-align: left;
-      }
-      .inv-body {
-        padding: 18px 16px 20px;
-      }
-      .form-body {
-        padding: 16px 16px 20px;
+      .inv-body { padding: 18px 16px 20px; }
+      .form-body { padding: 16px 16px 20px; }
+      .item-row {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "desc desc"
+          "qty rate"
+          "amt remove";
       }
     }
     @media print {
@@ -315,13 +437,14 @@
     <!-- FORM CARD -->
     <div class="card form-card">
       <div class="form-header">
-        <div>
-          <h1>AT Digitals Invoice Generator</h1>
-          <div style="font-size: 12px; color: #9ca3af; margin-top: 2px;">
-            Enter client & work details → one‑click invoice + print/PDF.
+        <div class="form-header-left">
+          <div class="logo-circle">AT</div>
+          <div>
+            <div class="branding-title">AT Digitals · Invoice Generator</div>
+            <div class="branding-sub">Quick invoices for your automation & web dev clients.</div>
           </div>
         </div>
-        <div class="badge">LOCAL · PRIVATE · OFFLINE</div>
+        <div class="badge">PRIVATE · SELF‑HOSTED</div>
       </div>
 
       <div class="form-body">
@@ -329,7 +452,7 @@
           <div>
             <label>Invoice No.</label>
             <input id="f-inv-no" type="text" value="041" />
-            <div class="small">Example: 041, 042, 043...</div>
+            <div class="small">Example: 041, 042, 043…</div>
           </div>
           <div>
             <label>Invoice Date (DD-MM-YYYY)</label>
@@ -354,23 +477,27 @@
           </div>
         </div>
 
-        <div style="margin-top:16px;">
-          <label>Service Description</label>
-          <textarea id="f-desc" placeholder="e.g. Telegram bot with automation / Website with backend + frontend"></textarea>
+        <!-- MULTI ITEM SECTION -->
+        <div class="items-form-wrapper">
+          <div class="items-form-header">
+            <div><strong>Invoice Items</strong> (multiple lines supported)</div>
+            <div style="font-size:11px;color:#6b7280;">Qty × Rate = Amount · All lines auto‑total</div>
+          </div>
+          <div id="items-container"></div>
+          <button type="button" class="add-btn" onclick="addItemRow()">
+            ➕ Add one more item
+          </button>
         </div>
 
-        <div class="grid grid-3" style="margin-top:16px;">
+        <div class="grid grid-2" style="margin-top:18px;">
           <div>
-            <label>Quantity</label>
-            <input id="f-qty" type="number" value="1" min="1" />
-          </div>
-          <div>
-            <label>Rate per item (₹)</label>
-            <input id="f-rate" type="number" value="5000" min="0" />
-          </div>
-          <div>
-            <label>UPI / Payment note (optional)</label>
+            <label>UPI ID</label>
             <input id="f-upi" type="text" value="7566144444" />
+            <div class="small">Same UPI will show below QR & payment section.</div>
+          </div>
+          <div>
+            <label>Bank Details (optional)</label>
+            <textarea id="f-bank" rows="2" placeholder="Bank name, A/C no, IFSC, etc."></textarea>
           </div>
         </div>
 
@@ -378,7 +505,7 @@
           ✨ Generate Invoice & Preview
         </button>
         <div class="small">
-          After preview opens, use browser Print → “Save as PDF” for sharing.
+          After preview opens, use browser Print → “Save as PDF” to share with client.
         </div>
       </div>
     </div>
@@ -386,11 +513,14 @@
     <!-- INVOICE CARD -->
     <div class="invoice-card" id="invoice-card" style="display:none;">
       <div class="inv-header">
-        <div>
-          <div class="inv-title">INVOICE</div>
-          <div class="inv-sub">AT Digitals · Bilaspur · Software & Automation Services</div>
+        <div class="inv-left">
+          <div class="inv-logo">AT</div>
+          <div class="inv-title-block">
+            <div class="inv-title">INVOICE</div>
+            <div class="inv-sub">AT Digitals · Bilaspur · Software & Automation Services</div>
+          </div>
         </div>
-        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <div class="pill-wrap">
           <div class="pill">
             <span class="pill-label">Invoice No.</span>
             <span class="pill-value" id="v-inv-no">#041</span>
@@ -434,40 +564,53 @@
               <th style="width:140px;">Amount</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td id="v-desc">Service work details</td>
-              <td class="num" id="v-qty">1</td>
-              <td class="num" id="v-rate">₹5,000</td>
-              <td class="num" id="v-amount">₹5,000</td>
-            </tr>
-          </tbody>
+          <tbody id="v-items-body"></tbody>
         </table>
 
         <div class="total-wrap">
           <div class="total-box">
             <div class="total-row">
-              <div class="total-label">Subtotal</div>
-              <div id="v-subtotal">₹5,000</div>
+              <div>Subtotal</div>
+              <div id="v-subtotal">₹0</div>
             </div>
             <div class="total-row" style="font-size:12px;color:#6b7280;">
               <div>GST</div>
               <div>₹0 (Non‑GST)</div>
             </div>
-            <div class="grand" id="v-grand">₹5,000</div>
+            <div class="grand" id="v-grand">₹0</div>
+          </div>
+
+          <div class="payment-flex">
+            <div>
+              <div class="pay-section">
+                <div class="pay-title">Payment Information</div>
+                <div id="v-terms">Payment due within 7 days after activation of service.</div>
+                <div>Due date: <span id="v-due-2">07-03-2026</span></div>
+                <div>Preferred method: UPI / Bank transfer</div>
+                <div class="upi-chip">
+                  <span>📱 UPI:</span>
+                  <span id="v-upi">7566144444</span>
+                </div>
+              </div>
+              <div class="bank-box" id="bank-box" style="display:none;">
+                <div class="bank-title">Bank Transfer Details</div>
+                <div id="v-bank"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="qr-box">
+                <div>
+                  <div class="qr-inner">
+                    <div></div>
+                  </div>
+                  <div class="qr-caption">Scan to pay UPI</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="pay-section">
-          <div class="pay-title">Payment Information</div>
-          <div id="v-terms">Payment due within 7 days after activation of service.</div>
-          <div>Due date: <span id="v-due-2">07-03-2026</span></div>
-          <div>Preferred method: UPI / Bank transfer</div>
-          <div class="upi-chip">
-            <span>📱 UPI:</span>
-            <span id="v-upi">7566144444</span>
-          </div>
-        </div>
       </div>
 
       <div class="footer">
@@ -475,24 +618,49 @@
         <span>This is a computer‑generated invoice and does not require a physical signature.</span>
       </div>
     </div>
-
   </div>
 
   <script>
+    function addItemRow(desc = "", qty = 1, rate = 0) {
+      const container = document.getElementById("items-container");
+      const row = document.createElement("div");
+      row.className = "item-row";
+      row.innerHTML = `
+        <input class="item-desc" placeholder="Description" value="${desc}">
+        <input class="item-qty" type="number" min="1" value="${qty}">
+        <input class="item-rate" type="number" min="0" value="${rate}">
+        <input class="item-amount" type="number" min="0" value="${qty * rate}" readonly>
+        <button type="button" class="remove-btn" title="Remove line">×</button>
+      `;
+      row.querySelector(".item-qty").addEventListener("input", () => syncAmount(row));
+      row.querySelector(".item-rate").addEventListener("input", () => syncAmount(row));
+      row.querySelector(".remove-btn").addEventListener("click", () => {
+        container.removeChild(row);
+      });
+      container.appendChild(row);
+    }
+
+    function syncAmount(row) {
+      const qty = Number(row.querySelector(".item-qty").value) || 0;
+      const rate = Number(row.querySelector(".item-rate").value) || 0;
+      row.querySelector(".item-amount").value = qty * rate;
+    }
+
+    // default one row
+    addItemRow("Service description", 1, 5000);
+
     function parseDateDDMMYYYY(str) {
       const [dd, mm, yyyy] = str.split("-");
       if (!dd || !mm || !yyyy) return null;
       const d = new Date(Number(yyyy), Number(mm) - 1, Number(dd));
       return isNaN(d.getTime()) ? null : d;
     }
-
     function formatDateDDMMYYYY(date) {
       const dd = String(date.getDate()).padStart(2, "0");
       const mm = String(date.getMonth() + 1).padStart(2, "0");
       const yyyy = date.getFullYear();
       return dd + "-" + mm + "-" + yyyy;
     }
-
     function formatINR(n) {
       return "₹" + Number(n).toLocaleString("en-IN");
     }
@@ -503,18 +671,33 @@
       const dueDays = Number(document.getElementById("f-due-days").value) || 0;
       const clientName = document.getElementById("f-client-name").value.trim() || "Client Name";
       const clientAddr = document.getElementById("f-client-addr").value.trim() || "Client Address";
-      const desc = document.getElementById("f-desc").value.trim() || "Service work";
-      const qty = Number(document.getElementById("f-qty").value) || 1;
-      const rate = Number(document.getElementById("f-rate").value) || 0;
       const upi = document.getElementById("f-upi").value.trim() || "7566144444";
-
-      const subtotal = qty * rate;
+      const bank = document.getElementById("f-bank").value.trim();
 
       const invDate = parseDateDDMMYYYY(dateStr) || new Date();
       const dueDate = new Date(invDate.getTime());
       dueDate.setDate(dueDate.getDate() + dueDays);
       const dueStr = formatDateDDMMYYYY(dueDate);
 
+      // items
+      const rows = Array.from(document.querySelectorAll("#items-container .item-row"));
+      let subtotal = 0;
+      const items = [];
+      rows.forEach(r => {
+        const desc = r.querySelector(".item-desc").value.trim();
+        const qty = Number(r.querySelector(".item-qty").value) || 0;
+        const rate = Number(r.querySelector(".item-rate").value) || 0;
+        if (!desc && qty === 0 && rate === 0) return;
+        const amount = qty * rate;
+        subtotal += amount;
+        items.push({ desc, qty, rate, amount });
+      });
+      if (items.length === 0) {
+        alert("At least one item required.");
+        return;
+      }
+
+      // fill header
       document.getElementById("v-inv-no").textContent = "#" + invNo;
       document.getElementById("v-date").textContent = dateStr;
       document.getElementById("v-due").textContent = dueStr;
@@ -522,22 +705,40 @@
       document.getElementById("v-client-name").textContent = clientName;
       document.getElementById("v-client-addr").textContent = clientAddr;
 
-      document.getElementById("v-desc").textContent = desc;
-      document.getElementById("v-qty").textContent = qty;
-      document.getElementById("v-rate").textContent = formatINR(rate);
-      document.getElementById("v-amount").textContent = formatINR(subtotal);
+      // fill table body
+      const body = document.getElementById("v-items-body");
+      body.innerHTML = "";
+      items.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${item.desc || "&nbsp;"}</td>
+          <td class="num">${item.qty}</td>
+          <td class="num">${formatINR(item.rate)}</td>
+          <td class="num">${formatINR(item.amount)}</td>
+        `;
+        body.appendChild(tr);
+      });
+
       document.getElementById("v-subtotal").textContent = formatINR(subtotal);
       document.getElementById("v-grand").textContent = formatINR(subtotal);
 
       document.getElementById("v-terms").textContent =
-        "Payment due within " +
-        dueDays +
-        " days after activation of service.";
+        "Payment due within " + dueDays + " days after activation of service.";
       document.getElementById("v-due-2").textContent = dueStr;
       document.getElementById("v-upi").textContent = upi;
 
+      if (bank) {
+        document.getElementById("v-bank").textContent = bank;
+        document.getElementById("bank-box").style.display = "block";
+      } else {
+        document.getElementById("bank-box").style.display = "none";
+      }
+
       document.getElementById("invoice-card").style.display = "block";
-      window.scrollTo({ top: document.getElementById("invoice-card").offsetTop - 12, behavior: "smooth" });
+      window.scrollTo({
+        top: document.getElementById("invoice-card").offsetTop - 10,
+        behavior: "smooth",
+      });
     }
   </script>
 </body>
