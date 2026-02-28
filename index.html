@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AT Digitals - Invoice Generator</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.35);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .form-header {
+      padding: 18px 24px;
+      background: rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .form-header h1 {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .form-body {
+      padding: 20px 24px 24px;
+    }
+    .badge {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+    @media (min-width: 720px) {
+      .grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .grid-3 {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+    }
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 4px;
+      display: block;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1.5px solid #e5e7eb;
+      font-size: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    textarea { resize: vertical; min-height: 60px; }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #6366f1;
+      box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.35);
+    }
+    .btn-primary {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #f9fafb;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      cursor: pointer;
+      box-shadow: 0 14px 30px rgba(79, 70, 229, 0.55);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 4px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(79, 70, 229, 0.7);
+    }
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 16px rgba(79, 70, 229, 0.55);
+    }
+    .small {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+    /* Invoice */
+    .invoice-card {
+      max-width: 900px;
+      margin: 0 auto;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #f9fafb;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+    }
+    .inv-header {
+      background: radial-gradient(circle at top left, #6366f1, #4f46e5, #0f172a);
+      color: #e5e7eb;
+      padding: 26px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .inv-title {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .inv-sub {
+      font-size: 13px;
+      color: #c7d2fe;
+      margin-top: 3px;
+    }
+    .pill {
+      border-radius: 999px;
+      border: 1px solid rgba(191, 219, 254, 0.8);
+      padding: 8px 14px;
+      font-size: 13px;
+      text-align: right;
+      min-width: 140px;
+    }
+    .pill span {
+      display: block;
+    }
+    .pill-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #a5b4fc;
+    }
+    .pill-value {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+    .inv-body {
+      padding: 26px 30px 28px;
+      background: #f9fafb;
+    }
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+    .company-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: #4c1d95;
+      margin-bottom: 4px;
+    }
+    .text {
+      font-size: 13px;
+      color: #4b5563;
+      line-height: 1.7;
+    }
+    .muted { color: #6b7280; font-size: 12px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 13px;
+    }
+    thead {
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      color: white;
+    }
+    th, td {
+      padding: 12px 10px;
+      text-align: left;
+    }
+    th {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+    tbody tr:nth-child(odd) {
+      background: #f3f4f6;
+    }
+    tbody tr:nth-child(even) {
+      background: #e5e7eb;
+    }
+    td.num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .total-wrap {
+      margin-top: 18px;
+      padding-top: 10px;
+      border-top: 1px solid #cbd5f5;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .total-box {
+      min-width: 260px;
+      background: #eef2ff;
+      border-radius: 12px;
+      padding: 14px 18px;
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+    }
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 4px;
+      color: #111827;
+    }
+    .total-label {
+      font-weight: 600;
+    }
+    .grand {
+      font-size: 20px;
+      font-weight: 800;
+      color: #4c1d95;
+      margin-top: 2px;
+    }
+    .pay-section {
+      margin-top: 20px;
+      padding: 16px 18px;
+      background: #fff7ed;
+      border-radius: 12px;
+      border-left: 5px solid #f97316;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 13px;
+    }
+    .pay-title {
+      font-weight: 700;
+      color: #c05621;
+      font-size: 14px;
+    }
+    .upi-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid #fed7aa;
+      font-weight: 700;
+      color: #4c1d95;
+      margin-top: 4px;
+    }
+    .footer {
+      padding: 16px 22px 18px;
+      background: #f3f4f6;
+      text-align: center;
+      font-size: 12px;
+      color: #6b7280;
+    }
+    .footer span {
+      display: block;
+      margin-top: 4px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+    @media (max-width: 720px) {
+      .inv-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .pill {
+        align-self: stretch;
+        text-align: left;
+      }
+      .inv-body {
+        padding: 18px 16px 20px;
+      }
+      .form-body {
+        padding: 16px 16px 20px;
+      }
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .card { box-shadow: none; margin: 0; border-radius: 0; }
+      .form-card { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- FORM CARD -->
+    <div class="card form-card">
+      <div class="form-header">
+        <div>
+          <h1>AT Digitals Invoice Generator</h1>
+          <div style="font-size: 12px; color: #9ca3af; margin-top: 2px;">
+            Enter client & work details → one‑click invoice + print/PDF.
+          </div>
+        </div>
+        <div class="badge">LOCAL · PRIVATE · OFFLINE</div>
+      </div>
+
+      <div class="form-body">
+        <div class="grid grid-3">
+          <div>
+            <label>Invoice No.</label>
+            <input id="f-inv-no" type="text" value="041" />
+            <div class="small">Example: 041, 042, 043...</div>
+          </div>
+          <div>
+            <label>Invoice Date (DD-MM-YYYY)</label>
+            <input id="f-date" type="text" value="28-02-2026" />
+          </div>
+          <div>
+            <label>Due after (days)</label>
+            <input id="f-due-days" type="number" value="7" min="0" />
+          </div>
+        </div>
+
+        <hr style="border:none;border-top:1px dashed #e5e7eb;margin:18px 0;">
+
+        <div class="grid grid-2">
+          <div>
+            <label>Client Name</label>
+            <input id="f-client-name" type="text" placeholder="Client full name" />
+          </div>
+          <div>
+            <label>Client Address</label>
+            <input id="f-client-addr" type="text" placeholder="City / State" />
+          </div>
+        </div>
+
+        <div style="margin-top:16px;">
+          <label>Service Description</label>
+          <textarea id="f-desc" placeholder="e.g. Telegram bot with automation / Website with backend + frontend"></textarea>
+        </div>
+
+        <div class="grid grid-3" style="margin-top:16px;">
+          <div>
+            <label>Quantity</label>
+            <input id="f-qty" type="number" value="1" min="1" />
+          </div>
+          <div>
+            <label>Rate per item (₹)</label>
+            <input id="f-rate" type="number" value="5000" min="0" />
+          </div>
+          <div>
+            <label>UPI / Payment note (optional)</label>
+            <input id="f-upi" type="text" value="7566144444" />
+          </div>
+        </div>
+
+        <button class="btn-primary" onclick="generateInvoice()">
+          ✨ Generate Invoice & Preview
+        </button>
+        <div class="small">
+          After preview opens, use browser Print → “Save as PDF” for sharing.
+        </div>
+      </div>
+    </div>
+
+    <!-- INVOICE CARD -->
+    <div class="invoice-card" id="invoice-card" style="display:none;">
+      <div class="inv-header">
+        <div>
+          <div class="inv-title">INVOICE</div>
+          <div class="inv-sub">AT Digitals · Bilaspur · Software & Automation Services</div>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <div class="pill">
+            <span class="pill-label">Invoice No.</span>
+            <span class="pill-value" id="v-inv-no">#041</span>
+          </div>
+          <div class="pill">
+            <span class="pill-label">Invoice Date</span>
+            <span class="pill-value" id="v-date">28-02-2026</span>
+          </div>
+          <div class="pill">
+            <span class="pill-label">Due Date</span>
+            <span class="pill-value" id="v-due">07-03-2026</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="inv-body">
+        <div class="grid grid-2">
+          <div>
+            <div class="section-title">From</div>
+            <div class="company-name">AT Digitals</div>
+            <div class="text">
+              Flat no A2 Shakuntala Heights<br />
+              Seepat Road, Bilaspur, Chhattisgarh<br />
+              Phone: +91 7566144444<br />
+              Email: atlicdo@gmail.com
+            </div>
+          </div>
+          <div>
+            <div class="section-title">Bill To</div>
+            <div class="company-name" id="v-client-name">Client Name</div>
+            <div class="text" id="v-client-addr">Client Address</div>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th style="width:70px;">Qty</th>
+              <th style="width:120px;">Rate</th>
+              <th style="width:140px;">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="v-desc">Service work details</td>
+              <td class="num" id="v-qty">1</td>
+              <td class="num" id="v-rate">₹5,000</td>
+              <td class="num" id="v-amount">₹5,000</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="total-wrap">
+          <div class="total-box">
+            <div class="total-row">
+              <div class="total-label">Subtotal</div>
+              <div id="v-subtotal">₹5,000</div>
+            </div>
+            <div class="total-row" style="font-size:12px;color:#6b7280;">
+              <div>GST</div>
+              <div>₹0 (Non‑GST)</div>
+            </div>
+            <div class="grand" id="v-grand">₹5,000</div>
+          </div>
+        </div>
+
+        <div class="pay-section">
+          <div class="pay-title">Payment Information</div>
+          <div id="v-terms">Payment due within 7 days after activation of service.</div>
+          <div>Due date: <span id="v-due-2">07-03-2026</span></div>
+          <div>Preferred method: UPI / Bank transfer</div>
+          <div class="upi-chip">
+            <span>📱 UPI:</span>
+            <span id="v-upi">7566144444</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        Thank you for choosing AT Digitals for your automation & development needs.
+        <span>This is a computer‑generated invoice and does not require a physical signature.</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function parseDateDDMMYYYY(str) {
+      const [dd, mm, yyyy] = str.split("-");
+      if (!dd || !mm || !yyyy) return null;
+      const d = new Date(Number(yyyy), Number(mm) - 1, Number(dd));
+      return isNaN(d.getTime()) ? null : d;
+    }
+
+    function formatDateDDMMYYYY(date) {
+      const dd = String(date.getDate()).padStart(2, "0");
+      const mm = String(date.getMonth() + 1).padStart(2, "0");
+      const yyyy = date.getFullYear();
+      return dd + "-" + mm + "-" + yyyy;
+    }
+
+    function formatINR(n) {
+      return "₹" + Number(n).toLocaleString("en-IN");
+    }
+
+    function generateInvoice() {
+      const invNo = document.getElementById("f-inv-no").value.trim() || "000";
+      const dateStr = document.getElementById("f-date").value.trim() || "01-01-2026";
+      const dueDays = Number(document.getElementById("f-due-days").value) || 0;
+      const clientName = document.getElementById("f-client-name").value.trim() || "Client Name";
+      const clientAddr = document.getElementById("f-client-addr").value.trim() || "Client Address";
+      const desc = document.getElementById("f-desc").value.trim() || "Service work";
+      const qty = Number(document.getElementById("f-qty").value) || 1;
+      const rate = Number(document.getElementById("f-rate").value) || 0;
+      const upi = document.getElementById("f-upi").value.trim() || "7566144444";
+
+      const subtotal = qty * rate;
+
+      const invDate = parseDateDDMMYYYY(dateStr) || new Date();
+      const dueDate = new Date(invDate.getTime());
+      dueDate.setDate(dueDate.getDate() + dueDays);
+      const dueStr = formatDateDDMMYYYY(dueDate);
+
+      document.getElementById("v-inv-no").textContent = "#" + invNo;
+      document.getElementById("v-date").textContent = dateStr;
+      document.getElementById("v-due").textContent = dueStr;
+
+      document.getElementById("v-client-name").textContent = clientName;
+      document.getElementById("v-client-addr").textContent = clientAddr;
+
+      document.getElementById("v-desc").textContent = desc;
+      document.getElementById("v-qty").textContent = qty;
+      document.getElementById("v-rate").textContent = formatINR(rate);
+      document.getElementById("v-amount").textContent = formatINR(subtotal);
+      document.getElementById("v-subtotal").textContent = formatINR(subtotal);
+      document.getElementById("v-grand").textContent = formatINR(subtotal);
+
+      document.getElementById("v-terms").textContent =
+        "Payment due within " +
+        dueDays +
+        " days after activation of service.";
+      document.getElementById("v-due-2").textContent = dueStr;
+      document.getElementById("v-upi").textContent = upi;
+
+      document.getElementById("invoice-card").style.display = "block";
+      window.scrollTo({ top: document.getElementById("invoice-card").offsetTop - 12, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
