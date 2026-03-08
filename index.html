@@ -17,6 +17,7 @@
     }
     .container { max-width: 1180px; margin: 0 auto; }
 
+
     .card {
       background: #fff;
       border-radius: 16px;
@@ -95,6 +96,7 @@
     }
     .small { font-size: 12px; color: #6b7280; margin-top: 4px; }
 
+
     .items-form-wrapper {
       margin-top: 18px;
       border-radius: 12px;
@@ -146,6 +148,7 @@
       font-weight: 600;
     }
 
+
     .btn-primary {
       width: 100%;
       border: none;
@@ -168,6 +171,30 @@
       transform: translateY(-1px);
       box-shadow: 0 18px 40px rgba(79, 70, 229, 0.7);
     }
+
+    .btn-print {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #f9fafb;
+      background: linear-gradient(135deg, #10b981, #059669);
+      cursor: pointer;
+      box-shadow: 0 14px 30px rgba(16, 185, 129, 0.55);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-print:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(16, 185, 129, 0.7);
+    }
+
 
     .invoice-card {
       max-width: 1000px;
@@ -229,6 +256,7 @@
     }
     .pill-value { font-weight: 600; color: #e5e7eb; }
 
+
     .inv-body { padding: 22px 28px 26px; background: #f9fafb; }
     .section-title {
       font-size: 11px;
@@ -245,6 +273,7 @@
       margin-bottom: 4px;
     }
     .text { font-size: 13px; color: #4b5563; line-height: 1.7; }
+
 
     table {
       width: 100%;
@@ -268,6 +297,7 @@
     tbody tr:nth-child(odd) { background: #f3f4f6; }
     tbody tr:nth-child(even) { background: #e5e7eb; }
     td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
 
     .total-wrap {
       margin-top: 16px;
@@ -299,6 +329,7 @@
       color: #4c1d95;
       margin-top: 2px;
     }
+
 
     .payment-flex {
       display: grid;
@@ -338,6 +369,7 @@
     }
     .bank-title { font-weight: 700; color: #0369a1; margin-bottom: 4px; }
 
+
     .qr-box {
       display: flex;
       align-items: center;
@@ -353,6 +385,7 @@
       color: #e5e7eb;
     }
 
+
     .footer {
       padding: 14px 22px 16px;
       background: #f3f4f6;
@@ -367,6 +400,7 @@
       color: #9ca3af;
     }
 
+
     @media (max-width: 720px) {
       .form-header { flex-direction: column; align-items: flex-start; }
       .inv-header { flex-direction: column; align-items: flex-start; }
@@ -378,11 +412,13 @@
       body { background: #fff; padding: 0; }
       .card { box-shadow: none; margin: 0; border-radius: 0; }
       .form-card { display: none; }
+      .btn-print { display: none; }
     }
   </style>
 </head>
 <body>
   <div class="container">
+
 
     <!-- FORM CARD -->
     <div class="card form-card">
@@ -398,6 +434,7 @@
         </div>
         <div class="badge">PRIVATE · SELF‑HOSTED</div>
       </div>
+
 
       <div class="form-body">
         <div class="grid grid-3">
@@ -416,7 +453,9 @@
           </div>
         </div>
 
+
         <hr style="border:none;border-top:1px dashed #e5e7eb;margin:18px 0;">
+
 
         <div class="grid grid-2">
           <div>
@@ -429,6 +468,7 @@
           </div>
         </div>
 
+
         <div class="items-form-wrapper">
           <div class="items-form-header">
             <div><strong>Invoice Items</strong> (multi‑line)</div>
@@ -439,6 +479,7 @@
             ➕ Add one more item
           </button>
         </div>
+
 
         <div class="grid grid-2" style="margin-top:18px;">
           <div>
@@ -452,14 +493,13 @@
           </div>
         </div>
 
+
         <button class="btn-primary" onclick="generateInvoice()">
           ✨ Generate Invoice & Preview
         </button>
-        <div class="small">
-          After preview opens, browser Print → “Save as PDF”.
-        </div>
       </div>
     </div>
+
 
     <!-- INVOICE CARD -->
     <div class="invoice-card" id="invoice-card" style="display:none;">
@@ -489,6 +529,7 @@
         </div>
       </div>
 
+
       <div class="inv-body">
         <div class="grid grid-2">
           <div>
@@ -508,6 +549,7 @@
           </div>
         </div>
 
+
         <table>
           <thead>
             <tr>
@@ -519,6 +561,7 @@
           </thead>
           <tbody id="v-items-body"></tbody>
         </table>
+
 
         <div class="total-wrap">
           <div class="total-box">
@@ -532,6 +575,7 @@
             </div>
             <div class="grand" id="v-grand">₹0</div>
           </div>
+
 
           <div class="payment-flex">
             <div>
@@ -551,6 +595,7 @@
               </div>
             </div>
 
+
             <div>
               <div class="qr-box">
                 <div>
@@ -563,16 +608,31 @@
             </div>
           </div>
 
+
         </div>
 
+
       </div>
+
 
       <div class="footer">
         Thank you for choosing AT Digitals for your automation & development needs.
         <span>This is a computer‑generated invoice and does not require a physical signature.</span>
       </div>
+
+      <!-- PRINT BUTTON -->
+      <div style="padding: 0 28px 24px;">
+        <button class="btn-print" onclick="printInvoice()">
+          📥 Save as PDF / Print
+        </button>
+        <div class="small" style="text-align:center;margin-top:8px;">
+          iOS: Print dialog khulegi → pinch to zoom out → Share icon se "Save to Files"<br>
+          Desktop: Print dialog se "Save as PDF" choose karo
+        </div>
+      </div>
     </div>
   </div>
+
 
   <script>
     function addItemRow(desc = "", qty = 1, rate = 0) {
@@ -594,13 +654,16 @@
       container.appendChild(row);
     }
 
+
     function syncAmount(row) {
       const qty = Number(row.querySelector(".item-qty").value) || 0;
       const rate = Number(row.querySelector(".item-rate").value) || 0;
       row.querySelector(".item-amount").value = qty * rate;
     }
 
+
     addItemRow("Service description", 1, 5000);
+
 
     function parseDateDDMMYYYY(str) {
       const [dd, mm, yyyy] = str.split("-");
@@ -618,6 +681,7 @@
       return "₹" + Number(n).toLocaleString("en-IN");
     }
 
+
     function generateInvoice() {
       const invNo = document.getElementById("f-inv-no").value.trim() || "000";
       const dateStr = document.getElementById("f-date").value.trim() || "01-01-2026";
@@ -627,10 +691,12 @@
       const upi = document.getElementById("f-upi").value.trim() || "7566144444";
       const bank = document.getElementById("f-bank").value.trim();
 
+
       const invDate = parseDateDDMMYYYY(dateStr) || new Date();
       const dueDate = new Date(invDate.getTime());
       dueDate.setDate(dueDate.getDate() + dueDays);
       const dueStr = formatDateDDMMYYYY(dueDate);
+
 
       const rows = Array.from(document.querySelectorAll("#items-container .item-row"));
       let subtotal = 0;
@@ -649,12 +715,15 @@
         return;
       }
 
+
       document.getElementById("v-inv-no").textContent = "#" + invNo;
       document.getElementById("v-date").textContent = dateStr;
       document.getElementById("v-due").textContent = dueStr;
 
+
       document.getElementById("v-client-name").textContent = clientName;
       document.getElementById("v-client-addr").textContent = clientAddr;
+
 
       const body = document.getElementById("v-items-body");
       body.innerHTML = "";
@@ -669,13 +738,16 @@
         body.appendChild(tr);
       });
 
+
       document.getElementById("v-subtotal").textContent = formatINR(subtotal);
       document.getElementById("v-grand").textContent = formatINR(subtotal);
+
 
       document.getElementById("v-terms").textContent =
         "Payment due within " + dueDays + " days after activation of service.";
       document.getElementById("v-due-2").textContent = dueStr;
       document.getElementById("v-upi").textContent = upi;
+
 
       if (bank) {
         document.getElementById("v-bank").textContent = bank;
@@ -684,11 +756,16 @@
         document.getElementById("bank-box").style.display = "none";
       }
 
+
       document.getElementById("invoice-card").style.display = "block";
       window.scrollTo({
         top: document.getElementById("invoice-card").offsetTop - 10,
         behavior: "smooth",
       });
+    }
+
+    function printInvoice() {
+      window.print();
     }
   </script>
 </body>
